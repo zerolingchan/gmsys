@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuedu.mapper.RoleListMapper">
+  <resultMap id="BaseResultMap" type="com.neuedu.model.RoleList">
+    <id column="RID" jdbcType="INTEGER" property="rid" />
+    <result column="RNAME" jdbcType="VARCHAR" property="rname" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rolelist
+    where RID = #{rid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.model.RoleList">
+    insert into rolelist (RID, RNAME)
+    values (#{rid,jdbcType=INTEGER}, #{rname,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.model.RoleList">
+    update rolelist
+    set RNAME = #{rname,jdbcType=VARCHAR}
+    where RID = #{rid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select RID, RNAME
+    from rolelist
+    where RID = #{rid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select RID, RNAME
+    from rolelist
+  </select>
+</mapper>

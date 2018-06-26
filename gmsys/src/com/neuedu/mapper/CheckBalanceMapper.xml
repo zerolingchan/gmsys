@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuedu.mapper.CheckBalanceMapper">
+  <resultMap id="BaseResultMap" type="com.neuedu.model.CheckBalance">
+    <id column="CHID" jdbcType="INTEGER" property="chid" />
+    <result column="BUYID" jdbcType="INTEGER" property="buyid" />
+    <result column="BID" jdbcType="INTEGER" property="bid" />
+    <result column="REPAIRID" jdbcType="INTEGER" property="repairid" />
+    <result column="SID" jdbcType="INTEGER" property="sid" />
+    <result column="TID" jdbcType="INTEGER" property="tid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from checkbalance
+    where CHID = #{chid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.model.CheckBalance">
+    insert into checkbalance (CHID, BUYID, BID, 
+      REPAIRID, SID, TID)
+    values (#{chid,jdbcType=INTEGER}, #{buyid,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, 
+      #{repairid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.model.CheckBalance">
+    update checkbalance
+    set BUYID = #{buyid,jdbcType=INTEGER},
+      BID = #{bid,jdbcType=INTEGER},
+      REPAIRID = #{repairid,jdbcType=INTEGER},
+      SID = #{sid,jdbcType=INTEGER},
+      TID = #{tid,jdbcType=INTEGER}
+    where CHID = #{chid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select CHID, BUYID, BID, REPAIRID, SID, TID
+    from checkbalance
+    where CHID = #{chid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select CHID, BUYID, BID, REPAIRID, SID, TID
+    from checkbalance
+  </select>
+</mapper>

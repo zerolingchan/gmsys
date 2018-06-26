@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neuedu.mapper.RolePrivilegeMapper">
+  <resultMap id="BaseResultMap" type="com.neuedu.model.RolePrivilege">
+    <id column="RPID" jdbcType="INTEGER" property="rpid" />
+    <result column="RID" jdbcType="INTEGER" property="rid" />
+    <result column="PID" jdbcType="INTEGER" property="pid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from roleprivilege
+    where RPID = #{rpid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.model.RolePrivilege">
+    insert into roleprivilege (RPID, RID, PID
+      )
+    values (#{rpid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.model.RolePrivilege">
+    update roleprivilege
+    set RID = #{rid,jdbcType=INTEGER},
+      PID = #{pid,jdbcType=INTEGER}
+    where RPID = #{rpid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select RPID, RID, PID
+    from roleprivilege
+    where RPID = #{rpid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select RPID, RID, PID
+    from roleprivilege
+  </select>
+</mapper>
