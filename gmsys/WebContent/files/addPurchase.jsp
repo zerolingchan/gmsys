@@ -286,12 +286,6 @@ function verification() {
 	</div>
 	</header>
 
-
-
-
-
-
-
 	<div class="tpl-page-container tpl-page-header-fixed">
 
 
@@ -397,50 +391,47 @@ function verification() {
 
 		<%--内容 --%>
 		<div class="tpl-content-wrapper">
-
-			<form action="${pageContext.request.contextPath}/buy/add.do"
-				method="post" name="form" onsubmit="return verification()">
+            
+            <form action="${pageContext.request.contextPath}/buy/add.do" method="post" name="form" onsubmit="return verification()">
 				<div class="MainDiv">
-					<table width="99%" border="0" cellpadding="0" cellspacing="0"
-						class="CContent">
-						<tr>
-							<th class="tablestyle_title">采购单添加页面</th>
-						</tr>
-						<tr>
-							<td class="CPanel">
-
-								<table border="0" cellpadding="0" cellspacing="0"
-									style="width: 100%"></table>
+					<table width="99%" border="0" cellpadding="0" cellspacing="0" class="CContent">
+			  			<tr>
+			      			<th class="tablestyle_title" >采购单添加页面</th>
+			  			</tr>
+			  			<tr>
+			    			<td class="CPanel">
+					
+			    			<table border="0" cellpadding="0" cellspacing="0" style="width:100%"></table>
 							</td>
 						</tr>
 						<tr>
-							<td align="left"><input type="button" name="Submit"
-								value="保存" class="button" onclick="alert('保存成功！');" /> <input
-								type="button" name="Submit2" value="返回" class="button"
-								onclick="window.history.go(-1);" /></td>
+							<td align="left">
+							<input type="button" name="Submit" value="保存" class="button" onclick="alert('保存成功！');"/>　			
+							<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/>			
+							</td>
 						</tr>
-
+									
 						<TR>
 							<TD width="100%">
-								<fieldset style="height: 100%;">
-									<legend>添加采购信息</legend>
-									<table border="0" cellpadding="2" cellspacing="1"
-										style="width: 100%">
-										<tr>
-
-											<td width="16%" align="right" nowrap="nowrap">采购数量:</td>
-											<td width="34%"><input class="text" id="BUYCOUNT"
-												name='BUYCOUNT' style="width: 154px" value="" /></td>
-										</tr>
-
-										<tr>
-
-											<td nowrap="nowrap" align="right">采购时间:</td>
-											<td><input class="text" id="BUYTIME" name='BUYTIME'
-												style="width: 154px" value="" /></td>
-											<td align="right">供应商编号:</td>
-											<td><select name="PROVID" style="width: 154px">
-													<%
+								<fieldset style="height:100%;">
+								<legend>添加采购信息</legend>
+								<table border="0" cellpadding="2" cellspacing="1" style="width:100%">
+								<tr>
+									
+									<td width="16%" align="right" nowrap="nowrap">采购数量:</td>
+									<td width="34%"><input class="text" id="BUYCOUNT" name='BUYCOUNT' style="width:154px" value=""/>
+									</td>
+								</tr> 
+								
+								<tr>
+									
+									<td nowrap="nowrap" align="right">采购时间:</td>
+									<td><input  class="text" id="BUYTIME" name='BUYTIME'  style="width:154px" value=""/>
+									</td>
+									<td align="right">供应商编号:</td>
+								    <td>
+										<select name="PROVID" style="width:154px">
+									    		<%
 										    		List<Product> list=(List<Product>)request.getAttribute("Buy2");
 									              	Iterator<Product> it=list.iterator();
 									              	
@@ -448,45 +439,47 @@ function verification() {
 									              	
 									              		Product c=it.next();
 									    		%>
-
-
-													<option value="<%=c.getProvid()%>"><%=c.getProvid()%></option>
-													<%} %>
-											</select></td>
-										</tr>
-										<tr>
-											<td align="right">产品编号:</td>
-											<td><select name="DEPARTID" style="width: 154px">
-													<%
+									    		
+											   	
+											   	<option value ="<%=c.getProvid()%>"><%=c.getProvid()%></option>
+											  <%} %>
+											</select>
+									</td>
+								</tr>
+								<tr>
+									<td align="right">产品编号:</td>
+								    <td>
+										<select name="DEPARTID" style="width:154px">
+									    		<%
 										    		List<Department> list1=(List<Department>)request.getAttribute("Buy3");
 									              	Iterator<Department> it1=list1.iterator();
 									              	while(it1.hasNext()){
 									              	
 									              		Department d=it1.next();
 									    		%>
-
-
-													<option value="<%=d.getDepartid()%>"><%=d.getDepartid()%></option>
-													<% }%>
-											</select></td>
-
-
-										</tr>
-									</table>
-									<br />
-								</fieldset>
-							</TD>
-						</TR>
-						<TR>
-							<TD colspan="2" align="center" height="50px"><input
-								type="submit" name="Submit" value="保存" class="button" /> <input
-								type="button" name="Submit2" value="返回" class="button"
-								onclick="window.history.go(-1);" /></TD>
+									    		
+											   	
+											   	<option value ="<%=d.getDepartid()%>"><%=d.getDepartid()%></option>
+											  <% }%>
+											</select>
+									</td>
+									
+									
+								</tr>
+								</table><br />
+							    </fieldset>			
+						    </TD>
+					    </TR>
+				 	    <TR>
+							<TD colspan="2" align="center" height="50px">
+					    	<input type="submit" name="Submit" value="保存" class="button"/>
+					    	<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/>
+					    	</TD>
 						</TR>
 					</table>
 				</div>
-			</form>
-			<script>
+			    </form>
+			    <script>
 			        
 			        /*
 			         在网页中使用第三方js组件的开发步骤：
@@ -504,10 +497,7 @@ function verification() {
 			  
 			           }); 
 			    </script>
-
-
-
-		</div>
+        </div>
 
 
 		<script

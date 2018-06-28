@@ -379,61 +379,52 @@ document.getElementById("aa").style.display="";
 
 
 		<%--内容 --%>
-		<div class="tpl-content-wrapper">
-
-			<form action="${pageContext.request.contextPath}/buy/upate.do"
-				method="post" name="form" target="sypost">
+        <div class="tpl-content-wrapper">
+            
+            <form action="${pageContext.request.contextPath}/buy/upate.do" method="post"  name="form" target="sypost" >
 				<div class="MainDiv">
-					<table width="99%" border="0" cellpadding="0" cellspacing="0"
-						class="CContent">
-						<tr>
-							<th class="tablestyle_title">采购单基本信息修改</th>
-						</tr>
-						<tr>
-							<td class="CPanel">
-
-								<table border="0" cellpadding="0" cellspacing="0"
-									style="width: 100%">
-									<tr>
-										<td align="left"><input type="button" name="Submit"
-											value="保存" class="button" onclick="alert('保存成功！');" /> <input
-											type="button" name="Submit2" value="返回" class="button"
-											onclick="window.history.go(-1);" /></td>
-									</tr>
-									<TR>
-										<TD width="100%">
-											<fieldset style="height: 100%;">
-												<legend>采购单信息</legend>
-												<table border="0" cellpadding="2" cellspacing="1"
-													style="width: 100%">
-
-
-													<%
+				<table width="99%" border="0" cellpadding="0" cellspacing="0" class="CContent">
+				  <tr>
+				      <th class="tablestyle_title" >采购单基本信息修改</th>
+				  </tr>
+				  <tr>
+				    <td class="CPanel">
+						
+						<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+						<tr><td align="left">
+						<input type="button" name="Submit" value="保存" class="button" onclick="alert('保存成功！');"/>　
+							
+							<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/>
+						</td></tr>
+								<TR>
+							<TD width="100%">
+								<fieldset style="height:100%;">
+								<legend>采购单信息</legend>
+									  <table border="0" cellpadding="2" cellspacing="1" style="width:100%">
+									 
+									 
+									 <%
 									 	Buy ag=(Buy)request.getAttribute("Buy1");
 										
 										 
 									 %>
-
-													<tr>
-														<td nowrap align="right" width="15%">采购单号:</td>
-														<td width="35%"><input name='BUYID' type="text"
-															class="text" style="width: 154px"
-															value="<%=ag.getBUYID() %>" readonly="readonly" /> <span
-															class="red">*</span></td>
-														<td nowrap align="right" width="15%">采购数量:</td>
-														<td width="35%"><input name='BUYCOUNT' type="text"
-															class="text" style="width: 154px"
-															value="<%=ag.getBUYCOUNT() %>" />
-													</tr>
-													<tr>
-														<td nowrap align="right" width="15%">采购时间:</td>
-														<td width="35%"><input name='BUYTIME' type="text"
-															class="text" style="width: 154px"
-															value="<%=ag.getBUYTIME() %>" />
-														<td nowrap align="right" width="15%">供应商编号:</td>
-														<td width="35%"><select name="PROVID"
-															style="width: 154px">
-																<%
+									 
+									  <tr>
+									  <td nowrap align="right" width="15%">采购单号:</td>
+									    <td width="35%"><input name='BUYID' type="text" class="text" style="width:154px" value="<%=ag.getBUYID() %>"  readonly="readonly" />
+								        <span class="red">*</span></td>
+									    <td nowrap align="right" width="15%">采购数量:</td>
+									    <td width="35%"><input name='BUYCOUNT' type="text" class="text" style="width:154px" value="<%=ag.getBUYCOUNT() %>" />
+									  </tr>
+									   <tr>
+									  <td nowrap align="right" width="15%">采购时间:</td>
+									    <td width="35%"><input name='BUYTIME' type="text" class="text" style="width:154px" value="<%=ag.getBUYTIME() %>" />
+								      
+									    <td nowrap align="right" width="15%">供应商编号:</td>
+									    <td width="35%">
+									    
+									    <select name="PROVID" style="width:154px">
+									    		<%
 										    		List<Product> list=(List<Product>)request.getAttribute("Buy2");
 									              	Iterator<Product> it=list.iterator();
 									              	System.out.println(ag.getPROVID());
@@ -441,81 +432,78 @@ document.getElementById("aa").style.display="";
 									              	
 									              		Product c=it.next();
 									    		%>
-																<%
+									    		<%
 									    			if(c.getProvid()==ag.getPROVID())
 									    			{
 									    		%>
-																<option value="<%=c.getProvid()%>" selected><%=c.getProvid()%></option>
-																<%}else{ %>
-																<option value="<%=c.getProvid()%>"><%=c.getProvid()%></option>
-																<%} }%>
-														</select>
-													</tr>
-													<tr>
-														<td nowrap align="right" width="15%">产品编号:</td>
-														<td width="35%"><select name="DEPARTID"
-															style="width: 154px">
-																<%
+											   	<option value ="<%=c.getProvid()%>" selected><%=c.getProvid()%></option>
+											   	<%}else{ %>
+											   	<option value ="<%=c.getProvid()%>"><%=c.getProvid()%></option>
+											  <%} }%>
+											</select>
+									  </tr>
+									   <tr>
+									  <td nowrap align="right" width="15%">产品编号:</td>
+									    <td width="35%">
+								       		<select name="DEPARTID" style="width:154px">
+									    		<%
 										    		List<Department> list1=(List<Department>)request.getAttribute("Buy3");
 									              	Iterator<Department> it1=list1.iterator();
 									              	while(it1.hasNext()){
 									              	
 									              		Department d=it1.next();
 									    		%>
-																<%
+									    		<%
 									    			if(d.getDepartid()==ag.getDEPARTID())
 									    			{
 									    		%>
-																<option value="<%=d.getDepartid()%>" selected><%=d.getDepartid()%></option>
-																<%}else{ %>
-																<option value="<%=d.getDepartid()%>"><%=d.getDepartid()%></option>
-																<%} }%>
-														</select>
-													</tr>
-
-												</table>
-												<br />
-											</fieldset>
-										</TD>
-
-									</TR>
-
-
-
-
-
-								</TABLE>
-
-
-							</td>
-						</tr>
-
-
-
-
-
-						<TR>
-							<TD colspan="2" align="center" height="50px"><input
-								type="submit" name="Submit" value="保存" class="button"
-								onclick="alert('保存成功！');" /> <input type="button" name="Submit2"
-								value="返回" class="button" onclick="window.history.go(-1);" /></TD>
+											   	<option value ="<%=d.getDepartid()%>" selected><%=d.getDepartid()%></option>
+											   	<%}else{ %>
+											   	<option value ="<%=d.getDepartid()%>"><%=d.getDepartid()%></option>
+											  <%} }%>
+											</select>
+									    
+									    	
+									    	
+									  </tr>
+									
+									  </table>
+							  <br />
+								</fieldset>			</TD>
+							
 						</TR>
-					</TABLE>
-
-
-					</td>
-					</tr>
-
-
-
-					</table>
-
+						
+				
+						
+						
+						
+						</TABLE>
+					
+					
+					 </td>
+				  </tr>
+				  
+				  
+						
+						
+						
+						<TR>
+							<TD colspan="2" align="center" height="50px">
+							<input type="submit" name="Submit" value="保存" class="button" onclick="alert('保存成功！');"/>　
+							
+							<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/></TD>
+						</TR>
+						</TABLE>
+										
+					 </td>
+				  </tr>
+				  				  
+				  </table>
+				
 				</div>
-			</form>
+				</form>
 
-
-
-		</div>
+        </div>
 
 
 		<script

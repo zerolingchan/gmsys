@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.neuedu.mapper.PrivilegelistMapper">
-  <resultMap id="BaseResultMap" type="com.neuedu.model.Privilegelist">
+<mapper namespace="com.neuedu.mapper.PrivilegeListMapper">
+  <resultMap id="BaseResultMap" type="com.neuedu.model.PrivilegeList">
     <id column="PID" jdbcType="INTEGER" property="pid" />
     <result column="PNAME" jdbcType="VARCHAR" property="pname" />
     <result column="PURL" jdbcType="VARCHAR" property="purl" />
@@ -11,13 +11,13 @@
     delete from privilegelist
     where PID = #{pid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.neuedu.model.Privilegelist">
+  <insert id="insert" parameterType="com.neuedu.model.PrivilegeList">
     insert into privilegelist (PID, PNAME, PURL, 
       PARENTID)
     values (#{pid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{purl,jdbcType=VARCHAR}, 
       #{parentid,jdbcType=INTEGER})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.neuedu.model.Privilegelist">
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.model.PrivilegeList">
     update privilegelist
     set PNAME = #{pname,jdbcType=VARCHAR},
       PURL = #{purl,jdbcType=VARCHAR},
