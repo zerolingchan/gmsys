@@ -109,7 +109,7 @@ function unselectAll(){
 }
 
 function link(){
-    document.getElementById("fom").action="${pageContext.request.contextPath}/files/addcaigou.jsp";
+    document.getElementById("fom").action="${pageContext.request.contextPath}/files/addPurchase.jsp";
    document.getElementById("fom").submit();
 }
 function tishi()
@@ -377,7 +377,7 @@ function verification() {
 									class="tpl-left-nav-content tpl-badge-success"></i></li>
 						</ul></li>
 
-					<li class="tpl-left-nav-item"><a href="login.html"
+					<li class="tpl-left-nav-item"><a href="../login.html"
 						class="nav-link tpl-left-nav-link-list"> <i
 							class="am-icon-key"></i> <span>登录</span>
 

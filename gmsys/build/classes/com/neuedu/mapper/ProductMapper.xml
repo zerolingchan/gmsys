@@ -33,4 +33,9 @@
     select PRODID, PRODNAME, PRODCOUNT, PROVID
     from product
   </select>
+  <select id="selectByProvid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select PRODID, PRODNAME, PRODCOUNT, PROVID
+    from product
+    where PROVID = #{provid,jdbcType=INTEGER}
+  </select>
 </mapper>

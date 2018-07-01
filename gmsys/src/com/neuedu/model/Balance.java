@@ -15,9 +15,18 @@ public class Balance {
     private Date bdate;
 
     private Integer cid;
+    private String cname;
 
     private Integer departid;
+    
+    public String getCname() {
+		return cname;
+	}
 
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+	
     public Integer getBid() {
         return bid;
     }

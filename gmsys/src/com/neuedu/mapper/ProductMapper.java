@@ -9,6 +9,8 @@ public interface ProductMapper {
     int insert(Product record);
 
     Product selectByPrimaryKey(Integer prodid);
+    
+    Product selectByProvid(Integer provid);
 
     List<Product> selectAll();
 

@@ -12,7 +12,8 @@ public class Buy {
     private Integer provid;
 
     private Integer departid;
-
+    private Integer prodid;
+    
     public Integer getBuyid() {
         return buyid;
     }
@@ -52,4 +53,12 @@ public class Buy {
     public void setDepartid(Integer departid) {
         this.departid = departid;
     }
+    
+    public Integer getProdid() {
+		return prodid;
+	}
+
+	public void setProdid(Integer prodid) {
+		this.prodid = prodid;
+	}
 }

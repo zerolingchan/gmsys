@@ -1,5 +1,6 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="com.neuedu.model.Buy"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List" isELIgnored="false"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -296,7 +297,7 @@ $(function(){
 								href="${pageContext.request.contextPath}/department/findAll.do">
 									<i class="am-icon-angle-right"></i> <span>部门设置</span> <i
 									class="tpl-left-nav-content tpl-badge-success"></i> <a
-									href="../files/addzc.jsp"> <i class="am-icon-angle-right"></i>
+									href="../files/addProperty.jsp"> <i class="am-icon-angle-right"></i>
 										<span>资产录入</span> <i
 										class="tpl-left-nav-content tpl-badge-primary"></i> <a
 										href="../area/list.do"> <i class="am-icon-angle-right"></i>
@@ -365,7 +366,7 @@ $(function(){
 									class="tpl-left-nav-content tpl-badge-success"></i></li>
 						</ul></li>
 
-					<li class="tpl-left-nav-item"><a href="login.html"
+					<li class="tpl-left-nav-item"><a href="../login.html"
 						class="nav-link tpl-left-nav-link-list"> <i
 							class="am-icon-key"></i> <span>登录</span>
 
@@ -414,7 +415,7 @@ $(function(){
 						           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 					              </td>
 				          </tr>
-				              <tr>
+				              <tr style="text-align:center;">
 				                <td height="40" class="font42"><table width="100%" border="0" cellpadding="4" cellspacing="1" bgcolor="#464646" class="newfont03">
 				
 									                  <tr>
@@ -437,35 +438,42 @@ $(function(){
 				           <c:forEach items="${listBuy}" var="c">
 				           <tr>
 				
-				                    <td bgcolor="#FFFFFF"><input type="checkbox" name="delid" value="${c.BUYID}"/></td>
-				                    <td bgcolor="#FFFFFF">${c.BUYID}</td>
-				                    <td bgcolor="#FFFFFF">${c.BUYCOUNT}</td>
-				                    <td bgcolor="#FFFFFF">${c.BUYTIME}</td>
-				                    <td bgcolor="#FFFFFF">${c.PROVID}</td>
-				                    <td bgcolor="#FFFFFF">${c.DEPARTID}</td>
-				                    <td bgcolor="#FFFFFF">${c.pRODID}</td>
+				                    <td bgcolor="#FFFFFF"><input type="checkbox" name="delid" value="${c.buyid}"/></td>
+				                    <td bgcolor="#FFFFFF">${c.buyid}</td>
+				                    <td bgcolor="#FFFFFF">${c.buycount}</td>
+				                    <td bgcolor="#FFFFFF"><fmt:formatDate value="${c.buytime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+				                    <td bgcolor="#FFFFFF">${c.provid}</td>
+				                    <td bgcolor="#FFFFFF">${c.prodid}</td>
+				                    <td bgcolor="#FFFFFF">${c.departid}</td>
 				
 				        
-				                    <td bgcolor="#FFFFFF"><a href="${pageContext.request.contextPath}/buy/findById.do?id=${c.BUYID}">编辑</a>&nbsp;|&nbsp;<a href="${pageContext.request.contextPath}/buy/findById2.do?id=${c.BUYID}">查看</a></td>
+				                    <td bgcolor="#FFFFFF">
+					                    <a href="${pageContext.request.contextPath}/buy/findById.do?id=${c.buyid}">编辑</a>&nbsp;|&nbsp;
+					                    <a href="${pageContext.request.contextPath}/buy/findById2.do?id=${c.buyid}">查看</a>
+				                    </td>
 				           </tr> 
 				           </c:forEach> 
 				                 <%}else
 				                 { 
-				                	 Buy ag=(Buy)request.getAttribute("Buy1");
-				                	 
+									Buy ag=(Buy)request.getAttribute("Buy1");
+				           			SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+									
 				                 %>
 				                  <tr>
 				
-				                    <td bgcolor="#FFFFFF"><input type="checkbox" name="delid" value="<%= ag.getBUYID()%>"/></td>
-				                    <td bgcolor="#FFFFFF"><%= ag.getBUYID()%></td>
-				                    <td bgcolor="#FFFFFF"><%= ag.getBUYCOUNT()%></td>
-				                    <td bgcolor="#FFFFFF"><%= ag.getBUYTIME()%></td>
-				                    <td bgcolor="#FFFFFF"><%= ag.getPROVID()%></td>
-				                    <td bgcolor="#FFFFFF"><%= ag.getDEPARTID()%></td>
-				                    <td bgcolor="#FFFFFF"><%=ag.getpRODID() %></td>
+				                    <td bgcolor="#FFFFFF"><input type="checkbox" name="delid" value="<%= ag.getBuyid()%>"/></td>
+				                    <td bgcolor="#FFFFFF"><%= ag.getBuyid()%></td>
+				                    <td bgcolor="#FFFFFF"><%= ag.getBuycount()%></td>
+				                    <td bgcolor="#FFFFFF"><%= format0.format(ag.getBuytime())%></td>
+				                    <td bgcolor="#FFFFFF"><%= ag.getProvid()%></td>
+				                    <td bgcolor="#FFFFFF"><%= ag.getDepartid()%></td>
+				                    <td bgcolor="#FFFFFF"><%=ag.getProdid() %></td>
 				
 				        
-				                    <td bgcolor="#FFFFFF"><a href="${pageContext.request.contextPath}/buy/findById.do?id=${c.BUYID}">编辑</a>&nbsp;|&nbsp;<a href="${pageContext.request.contextPath}/buy/findById2.do?id=${c.BUYID}">查看</a></td>
+				                    <td bgcolor="#FFFFFF">
+				                    	<a href="${pageContext.request.contextPath}/buy/findById.do?id=<%=ag.getBuyid() %>">编辑</a>&nbsp;|&nbsp;
+				                    	<a href="${pageContext.request.contextPath}/buy/findById2.do?id=<%=ag.getBuyid() %>">查看</a>
+				                    </td>
 				           		</tr> 
 				               <%} %>
 				                  

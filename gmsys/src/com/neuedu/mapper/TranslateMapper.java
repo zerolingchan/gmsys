@@ -11,6 +11,6 @@ public interface TranslateMapper {
     Translate selectByPrimaryKey(Integer tid);
 
     List<Translate> selectAll();
-
+    List<Translate> selectOne(Integer tid);
     int updateByPrimaryKey(Translate record);
 }

@@ -98,7 +98,7 @@ function unselectAll(){
 }
 
 function link(){
-    document.getElementById("fom").action="${pageContext.request.contextPath}/files/addcaigou.jsp";
+    document.getElementById("fom").action="${pageContext.request.contextPath}/files/addPurchase.jsp";
    document.getElementById("fom").submit();
 }
 
@@ -280,7 +280,7 @@ function link(){
 								href="${pageContext.request.contextPath}/department/findAll.do">
 									<i class="am-icon-angle-right"></i> <span>部门设置</span> <i
 									class="tpl-left-nav-content tpl-badge-success"></i> <a
-									href="../files/addzc.jsp"> <i class="am-icon-angle-right"></i>
+									href="../files/addProperty.jsp"> <i class="am-icon-angle-right"></i>
 										<span>资产录入</span> <i
 										class="tpl-left-nav-content tpl-badge-primary"></i> <a
 										href="../area/list.do"> <i class="am-icon-angle-right"></i>
@@ -350,7 +350,7 @@ function link(){
 									class="tpl-left-nav-content tpl-badge-success"></i></li>
 						</ul></li>
 
-					<li class="tpl-left-nav-item"><a href="login.html"
+					<li class="tpl-left-nav-item"><a href="../login.html"
 						class="nav-link tpl-left-nav-link-list"> <i
 							class="am-icon-key"></i> <span>登录</span>
 
@@ -391,34 +391,34 @@ function link(){
 				  
 				  <%
 									 	Buy ag=(Buy)request.getAttribute("Buy1");
-										 
+										 SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
 										 
 									 %>
 				  
 				  <tr>
 				    <td width="16%" height="20" align="right" bgcolor="#FFFFFF">采购单号:</td>
-				    <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getBUYID() %></td>
+				    <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getBuyid() %></td>
 				  </tr>
 				  <tr>
 						<td width="16%" height="20" align="right" bgcolor="#FFFFFF">数量:</td>
-				    <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getBUYCOUNT() %></td>
+				    <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getBuycount() %></td>
 				  </tr>
 				  <tr>
 				    <td width="16%" height="20" align="right" bgcolor="#FFFFFF">采购时间:</td>
-				    <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getBUYTIME() %></td>
+				    <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=format0.format(ag.getBuytime()) %></td>
 				  </tr>
 				   <tr>
 				    <td width="16%" height="20" align="right" bgcolor="#FFFFFF">供应商编号:</td>
-				    <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getPROVID() %></td>
+				    <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getProvid() %></td>
 				  </tr>
 				   <tr>
 				  <td width="16%" height="20" align="right" bgcolor="#FFFFFF">产品编号：</td>
-				   <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getDEPARTID() %></td>
+				   <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getProdid() %></td>
 				   
 				  </tr>
 				  <tr>
 				     <td width="16%" height="20" align="right" bgcolor="#FFFFFF">部门编号:</td>
-				      <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getpRODID() %></td>
+				      <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getDepartid() %></td>
 				   
 				  </tr>
 				  </table></td>
@@ -451,8 +451,8 @@ function link(){
 				</form>
 
 			
-        </div>
 
+        </div>
 
 
 		<script

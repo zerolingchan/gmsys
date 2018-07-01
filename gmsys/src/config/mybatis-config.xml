@@ -10,20 +10,7 @@
 	</typeAliases>
 
 	<mappers>
-		<mapper resource="com/neuedu/mapper/UserAccountMapper.xml" />
-		<mapper resource="com/neuedu/mapper/CategoryMapper.xml" />
-		<mapper resource="com/neuedu/mapper/AreaMapper.xml" />
-		<mapper resource="com/neuedu/mapper/BalanceMapper.xml" />
-		<mapper resource="com/neuedu/mapper/BuyMapper.xml" />
-		<mapper resource="com/neuedu/mapper/CheckBalanceMapper.xml" />
-		<mapper resource="com/neuedu/mapper/DemoMapper.xml" />
-		<mapper resource="com/neuedu/mapper/DepartmentMapper.xml" />
-		<mapper resource="com/neuedu/mapper/PrivilegeListMapper.xml" />
-		<mapper resource="com/neuedu/mapper/ProductMapper.xml" />
-		<mapper resource="com/neuedu/mapper/ProviderMapper.xml" />
-		<mapper resource="com/neuedu/mapper/RepairMapper.xml" />
-		<mapper resource="com/neuedu/mapper/T_userMapper.xml" />
-		<mapper resource="com/neuedu/mapper/TranslateMapper.xml" />
+		<package name="com.neuedu.mapper"/>
 	</mappers>
 
 </configuration>

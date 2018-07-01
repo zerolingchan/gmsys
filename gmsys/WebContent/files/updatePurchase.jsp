@@ -296,7 +296,7 @@ document.getElementById("aa").style.display="";
 								href="${pageContext.request.contextPath}/department/findAll.do">
 									<i class="am-icon-angle-right"></i> <span>部门设置</span> <i
 									class="tpl-left-nav-content tpl-badge-success"></i> <a
-									href="../files/addzc.jsp"> <i class="am-icon-angle-right"></i>
+									href="../files/addProperty.jsp"> <i class="am-icon-angle-right"></i>
 										<span>资产录入</span> <i
 										class="tpl-left-nav-content tpl-badge-primary"></i> <a
 										href="../area/list.do"> <i class="am-icon-angle-right"></i>
@@ -366,7 +366,7 @@ document.getElementById("aa").style.display="";
 									class="tpl-left-nav-content tpl-badge-success"></i></li>
 						</ul></li>
 
-					<li class="tpl-left-nav-item"><a href="login.html"
+					<li class="tpl-left-nav-item"><a href="../login.html"
 						class="nav-link tpl-left-nav-link-list"> <i
 							class="am-icon-key"></i> <span>登录</span>
 
@@ -381,7 +381,7 @@ document.getElementById("aa").style.display="";
 		<%--内容 --%>
         <div class="tpl-content-wrapper">
             
-            <form action="${pageContext.request.contextPath}/buy/upate.do" method="post"  name="form" target="sypost" >
+            <form action="${pageContext.request.contextPath}/buy/upate.do" method="post"  name="form" >
 				<div class="MainDiv">
 				<table width="99%" border="0" cellpadding="0" cellspacing="0" class="CContent">
 				  <tr>
@@ -392,7 +392,7 @@ document.getElementById("aa").style.display="";
 						
 						<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
 						<tr><td align="left">
-						<input type="button" name="Submit" value="保存" class="button" onclick="alert('保存成功！');"/>　
+						<!-- <input type="button" name="Submit" value="保存" class="button" onclick="alert('保存成功！');"/>　 -->
 							
 							<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/>
 						</td></tr>
@@ -405,20 +405,20 @@ document.getElementById("aa").style.display="";
 									 
 									 <%
 									 	Buy ag=(Buy)request.getAttribute("Buy1");
-										
+										SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 										 
 									 %>
 									 
 									  <tr>
 									  <td nowrap align="right" width="15%">采购单号:</td>
-									    <td width="35%"><input name='BUYID' type="text" class="text" style="width:154px" value="<%=ag.getBUYID() %>"  readonly="readonly" />
+									    <td width="35%"><input name='BUYID' type="text" class="text" style="width:154px" value="<%=ag.getBuyid() %>"  readonly="readonly" />
 								        <span class="red">*</span></td>
 									    <td nowrap align="right" width="15%">采购数量:</td>
-									    <td width="35%"><input name='BUYCOUNT' type="text" class="text" style="width:154px" value="<%=ag.getBUYCOUNT() %>" />
+									    <td width="35%"><input name='BUYCOUNT' type="text" class="text" style="width:154px" value="<%=ag.getBuycount() %>" />
 									  </tr>
 									   <tr>
 									  <td nowrap align="right" width="15%">采购时间:</td>
-									    <td width="35%"><input name='BUYTIME' type="text" class="text" style="width:154px" value="<%=ag.getBUYTIME() %>" />
+									    <td width="35%"><input name='BUYTIME' type="text" class="text" style="width:154px" value="<%=format.format(ag.getBuytime()) %>" />
 								      
 									    <td nowrap align="right" width="15%">供应商编号:</td>
 									    <td width="35%">
@@ -427,13 +427,13 @@ document.getElementById("aa").style.display="";
 									    		<%
 										    		List<Product> list=(List<Product>)request.getAttribute("Buy2");
 									              	Iterator<Product> it=list.iterator();
-									              	System.out.println(ag.getPROVID());
+									              	System.out.println(ag.getProvid());
 									              	while(it.hasNext()){
 									              	
 									              		Product c=it.next();
 									    		%>
 									    		<%
-									    			if(c.getProvid()==ag.getPROVID())
+									    			if(c.getProvid()==ag.getProvid())
 									    			{
 									    		%>
 											   	<option value ="<%=c.getProvid()%>" selected><%=c.getProvid()%></option>
@@ -454,7 +454,7 @@ document.getElementById("aa").style.display="";
 									              		Department d=it1.next();
 									    		%>
 									    		<%
-									    			if(d.getDepartid()==ag.getDEPARTID())
+									    			if(d.getDepartid()==ag.getDepartid())
 									    			{
 									    		%>
 											   	<option value ="<%=d.getDepartid()%>" selected><%=d.getDepartid()%></option>
@@ -494,14 +494,19 @@ document.getElementById("aa").style.display="";
 							<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/></TD>
 						</TR>
 						</TABLE>
-										
+					
+					
 					 </td>
 				  </tr>
-				  				  
+				  
+				  
+				  
 				  </table>
 				
 				</div>
 				</form>
+
+			
 
         </div>
 

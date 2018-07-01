@@ -11,6 +11,6 @@ public interface RepairMapper {
     Repair selectByPrimaryKey(Integer repairid);
 
     List<Repair> selectAll();
-
+    List<Repair> selectOne(Integer repairid);
     int updateByPrimaryKey(Repair record);
 }

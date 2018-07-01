@@ -207,7 +207,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								href="${pageContext.request.contextPath}/department/findAll.do">
 									<i class="am-icon-angle-right"></i> <span>部门设置</span> <i
 									class="tpl-left-nav-content tpl-badge-success"></i> <a
-									href="../files/addzc.jsp"> <i class="am-icon-angle-right"></i>
+									href="../files/addProperty.jsp"> <i class="am-icon-angle-right"></i>
 										<span>资产录入</span> <i
 										class="tpl-left-nav-content tpl-badge-primary"></i> <a
 										href="../area/list.do"> <i class="am-icon-angle-right"></i>
