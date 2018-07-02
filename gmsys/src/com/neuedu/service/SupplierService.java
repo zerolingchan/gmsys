@@ -63,4 +63,6 @@ public interface SupplierService {
 	 * @param product
 	 */
 	public void deleteById2(Integer prodid);
+
+	public void updateProduct(Product product);
 }

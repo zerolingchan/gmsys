@@ -109,10 +109,9 @@ function unselectAll(){
 }
 
 function link(){
-    document.getElementById("fom").action="addproduct.htm";
+    document.getElementById("fom").action="xuqiumingxi.html";
    document.getElementById("fom").submit();
 }
-
 </SCRIPT>
 <body data-type="index">
 
@@ -354,12 +353,12 @@ function link(){
 					</a>
 						<ul class="tpl-left-nav-sub-menu" style="display: block">
 							<li><a
-								href="${pageContext.request.contextPath}/provider/findAll.do">
-									<i class="am-icon-angle-right"></i> <span>供应商信息查看</span> <i
-									class="tpl-left-nav-content tpl-badge-success"></i>
-							</a> <a href="${pageContext.request.contextPath}/product/findAll.do"
-								class="active"> <i class="am-icon-angle-right"></i> <span>产品信息查看</span>
-									<i class="tpl-left-nav-content tpl-badge-success"></i></li>
+								href="${pageContext.request.contextPath}/provider/findAll.do"
+								class="active"> <i class="am-icon-angle-right"></i> <span>供应商信息查看</span>
+									<i class="tpl-left-nav-content tpl-badge-success"></i>
+							</a> <a href="${pageContext.request.contextPath}/product/findAll.do">
+									<i class="am-icon-angle-right"></i> <span>产品信息查看</span> <i
+									class="tpl-left-nav-content tpl-badge-success"></i></li>
 						</ul></li>
 
 					<li class="tpl-left-nav-item"><a href="../login.html"
@@ -376,136 +375,115 @@ function link(){
 
 		<%--内容 --%>
 		<div class="tpl-content-wrapper">
-            <form name="fom" id="fom" method="post">
+			<form name="fom" id="fom" method="post">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				
-				  <tr>
-				    <td height="30">      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-				        <tr>
-				          <td height="62" background="../images/nav04.gif">
-				            
-						   <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-						    <tr>
-							  <td width="24"><img src="../images/ico07.gif" width="20" height="18" /></td>
-							  <td width="519"><label>产品编号:
-							      <input name="text" id="text" type="text" nam="gongs" />
-							  </label>
-							    </input>
-							    <input name="Submit" type="button" id="chaxun" class="right-button02" value="查 询" /></td>
-							   <td width="679" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>	
-						    </tr>
-				          </table></td>
-				        </tr>
-				    </table></td></tr>
-				  <tr>
-				    <td><table id="subtree1" style="DISPLAY: " width="100%" border="0" cellspacing="0" cellpadding="0">
-				        <tr>
-				          <td><table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
-					          <tr>
-					               <td height="20"><span class="newfont07">选择：<a href="#" class="right-font08" onclick="selectAll();">全选</a>-<a href="#" class="right-font08" onclick="unselectAll();">反选</a></span>
-							           <input name="Submit" type="button" id="delBtn" class="right-button08" value="删除所选产品信息" /> 
-							           <!-- <input name="Submit" type="button" class="right-button08" value="添加产品信息" onclick="link();" /> -->
-							           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-						              </td>
-					          </tr>
-				              <tr>
-				                <td height="40" class="font42"><table width="100%" border="0" cellpadding="4" cellspacing="1" bgcolor="#464646" class="newfont03">
-				
-									                  <tr>
-				                    <td height="20" colspan="14" align="center" bgcolor="#EEEEEE"class="tablestyle_title"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;产品详细列表 &nbsp;</td>
-				                    </tr>
-				                  <tr>
-								    <td width="8%" align="center" bgcolor="#EEEEEE">选择</td>
-				            <td width="12%" height="20" align="center" bgcolor="#EEEEEE">产品编号</td>
-									 <td width="12%" height="20" align="center" bgcolor="#EEEEEE">产品名称</td>
-				            <td width="10%" align="center" bgcolor="#EEEEEE">价格</td>
-				           <td width="10%" align="center" bgcolor="#EEEEEE">供应商编号</td>
-				
-				          <td width="11%" align="center" bgcolor="#EEEEEE">操作</td> 
-				          </tr>
-				                 
-				                 
-				                 
-				               <%
-				               
-						           if(request.getAttribute("query")==null)
-						           {
-				              		List<Product> list=(List<Product>)request.getAttribute("listProduct");
-				              		Iterator<Product> it=list.iterator();
-				              		while(it.hasNext()){
-				              	
-				              			Product v=it.next();
-				              	%>  
-				                 
-				                 
-				                  <tr style="text-align: center;">
-				
-						            <td bgcolor="#FFFFFF"><input type="checkbox" name="delid" value="<%=v.getProdid() %>"/></td>
-				                    <td bgcolor="#FFFFFF"><%=v.getProdid() %></td>
-						          	<td height="20" bgcolor="#FFFFFF"><%=v.getProdname() %></td>
-				                     <td bgcolor="#FFFFFF"><%=v.getProdcount() %></td>
-				                    <td height="20" bgcolor="#FFFFFF"><%=v.getProvid() %></td>
-				                    
-							         <td bgcolor="#FFFFFF">
-								         <a href="${pageContext.request.contextPath}/product/find.do?id=<%=v.getProdid() %>">编辑</a>&nbsp;|&nbsp;
-								         <a href="${pageContext.request.contextPath}/product/findProduct.do?id=<%=v.getProdid() %>">查看</a>
-							         </td> 
-				                  </tr>
-				                  <%
-					                  	}
-					                  } else {
-					                  	Product ag=(Product)request.getAttribute("query");
-				                   %>
-				                   
-				                  	<tr style="text-align: center;">
-					
-							            <td bgcolor="#FFFFFF"><input type="checkbox" name="delid" value="<%=ag.getProdid() %>"/></td>
-					                    <td bgcolor="#FFFFFF"><%=ag.getProdid() %></td>
-							          	<td height="20" bgcolor="#FFFFFF"><%=ag.getProdname() %></td>
-				                     	<td bgcolor="#FFFFFF"><%=ag.getProdcount() %></td>
-					                    <td height="20" bgcolor="#FFFFFF"><%=ag.getProvid() %></td>
-					                    
-								         <td bgcolor="#FFFFFF">
-									         <a href="addproduct.htm">编辑</a>&nbsp;|&nbsp;
-									         <a href="productdetails.html">查看</a>
-								         </td> 
-				                  	</tr>
-				                   <%} %>
-				                
-				 
-				                </table></td>
-				              </tr>
-				            </table></td>
-				        </tr>
-				      </table>
-				      <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
-				        <tr>
-				          <td height="6"><img src="../images/spacer.gif" width="1" height="1" /></td>
-				        </tr>
-				        <tr>
-				          <td height="33"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="right-font08">
-				              <tr>
-				                <td width="50%">共 <span class="right-text09">5</span> 页 | 第 <span class="right-text09">1</span> 页</td>
-				                <td width="49%" align="right">[<a href="#" class="right-font08">首页</a> | <a href="#" class="right-font08">上一页</a> | <a href="#" class="right-font08">下一页</a> | <a href="#" class="right-font08">末页</a>] 转至：</td>
-				                <td width="1%"><table width="20" border="0" cellspacing="0" cellpadding="0">
-				                    <tr>
-				                      <td width="1%"><input name="textfield3" type="text" class="right-textfield03" size="1" /></td>
-				                      <td width="87%"><input name="Submit23222" type="submit" class="right-button06" value=" " />
-				                      </td>
-				                    </tr>
-				                </table></td>
-				              </tr>
-				          </table></td>
-				        </tr>
-				      </table></td>
-				  </tr>
+					<tr>
+						<td height="30">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td height="62" background="../images/nav04.gif">
+										<table width="98%" border="0" align="center" cellpadding="0"
+											cellspacing="0">
+											<tr>
+												<td width="21">&nbsp;</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td><table id="subtree1" style="DISPLAY:" width="100%"
+								border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td><table width="95%" border="0" align="center"
+											cellpadding="0" cellspacing="0">
+											<tr>
+												<td height="40" class="font42"><table width="100%"
+														border="0" cellpadding="4" cellspacing="1"
+														bgcolor="#464646" class="newfont03">
+														<tr>
+															<td height="20" colspan="2" align="center"
+																bgcolor="#EEEEEE" class="tablestyle_title">
+																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																产品详细内容</td>
+														</tr>
+
+														<%
+				             							 Product v=(Product)request.getAttribute("listProduct");		
+				              							%>
+
+
+
+														<tr>
+															<td width="16%" height="20" align="right"
+																bgcolor="#FFFFFF">产品编号:</td>
+															<td width="84%" colspan="2" bgcolor="#FFFFFF"><%=v.getProdid()%></td>
+														</tr>
+														<tr>
+															<td width="16%" height="20" align="right"
+																bgcolor="#FFFFFF">产品名称:</td>
+															<td width="84%" colspan="2" bgcolor="#FFFFFF"><%=v.getProdname()%></td>
+														</tr>
+														<tr>
+															<td height="20" align="right" bgcolor="#FFFFFF">价格:</td>
+															<td colspan="2" bgcolor="#FFFFFF"><%=v.getProdcount()%></td>
+														</tr>
+														<tr>
+															<td height="20" align="right" bgcolor="#FFFFFF">供应商编号:</td>
+															<td colspan="2" bgcolor="#FFFFFF"><%=v.getProvid()%></td>
+														</tr>
+
+
+
+
+													</table></td>
+											</tr>
+										</table></td>
+								</tr>
+							</table>
+							<table width="95%" border="0" align="center" cellpadding="0"
+								cellspacing="0">
+								<tr>
+									<td height="6"><img src="../images/spacer.gif" width="1"
+										height="1" /></td>
+								</tr>
+								<tr>
+									<td height="33"><table width="100%" border="0"
+											align="center" cellpadding="0" cellspacing="0"
+											class="right-font08">
+											<tr>
+												<td width="50%">共 <span class="right-text09">5</span> 页
+													| 第 <span class="right-text09">1</span> 页
+												</td>
+												<td width="49%" align="right">[<a href="#"
+													class="right-font08">首页</a> | <a href="#"
+													class="right-font08">上一页</a> | <a href="#"
+													class="right-font08">下一页</a> | <a href="#"
+													class="right-font08">末页</a>] 转至：
+												</td>
+												<td width="1%"><table width="20" border="0"
+														cellspacing="0" cellpadding="0">
+														<tr>
+															<td width="1%"><input name="textfield3" type="text"
+																class="right-textfield03" size="1" /></td>
+															<td width="87%"><input name="Submit23222"
+																type="submit" class="right-button06" value=" " /></td>
+														</tr>
+													</table></td>
+											</tr>
+										</table></td>
+								</tr>
+							</table></td>
+					</tr>
 				</table>
-				</form>
-            
+			</form>
 
 
 
-        </div>
+
+		</div>
 
 
 		<script

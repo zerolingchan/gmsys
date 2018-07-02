@@ -160,7 +160,7 @@ public class AssetManageController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/buy/upate")
+	@RequestMapping("/buy/update")
 	public String update(Integer BUYID, Double BUYCOUNT, String BUYTIME, Integer PROVID, Integer DEPARTID,
 			HttpServletRequest request) {
 		try {

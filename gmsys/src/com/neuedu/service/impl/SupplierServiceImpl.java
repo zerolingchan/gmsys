@@ -72,4 +72,10 @@ public class SupplierServiceImpl implements SupplierService {
 		// TODO Auto-generated method stub
 		productMapper.deleteByPrimaryKey(prodid);
 	}
+	
+	@Override
+	public void updateProduct(Product product) {
+		// TODO Auto-generated method stub
+		productMapper.updateByPrimaryKey(product);
+	}
 }

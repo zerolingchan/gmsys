@@ -187,4 +187,47 @@ public class SupplierController {
 		request.setAttribute("listProduct", listProduct);
 		return "productInfo";
 	}
+	
+	/**
+	 * 根据id获取产品信息，跳转到产品编辑页
+	 * 
+	 * @param id
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/product/find")
+	public String findProductById(@RequestParam("id") Integer id, HttpServletRequest request) {
+		Product query = supplierService.findById2(id);
+		request.setAttribute("listProduct", query);
+		return "updateProduct";
+	}
+
+	@RequestMapping("/product/update")
+	public String update(@RequestParam("prodid") Integer prodid, @RequestParam("prodname") String prodname,
+			@RequestParam("prodcount") Double prodcount, @RequestParam("provid") Integer provid, HttpServletRequest request) {
+		Product product = new Product();
+		product.setProdid(prodid);
+		product.setProdname(prodname);
+		product.setProdcount(prodcount);
+		product.setProvid(provid);
+		supplierService.updateProduct(product);
+
+		List<Product> listProduct = supplierService.selectAll2();
+		request.setAttribute("listProduct", listProduct);
+		return "productInfo";
+	}
+
+	/**
+	 * 根据id获取产品信息，跳转到产品详情页
+	 * 
+	 * @param id
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/product/findProduct")
+	public String findProductById1(@RequestParam("id") Integer id, HttpServletRequest request) {
+		Product query = supplierService.findById2(id);
+		request.setAttribute("listProduct", query);
+		return "productDetail";
+	}
 }

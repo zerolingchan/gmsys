@@ -459,8 +459,8 @@ function link(){
 																<td height="20" bgcolor="#FFFFFF">${area.areaname }</td>
 																<td height="20" bgcolor="#FFFFFF">${area.relative==0?"集团":area.areaname}</td>
 																<td bgcolor="#FFFFFF"><a
-																	href="<%=path%>/files/updateArea.htm">编辑</a>&nbsp;|&nbsp;<a
-																	href="<%=path%>/files/areaDetail.html">查看</a></td>
+																	href="${pageContext.request.contextPath}/area/findById.do?areaid=${area.areaid}">编辑</a>&nbsp;|&nbsp;<a
+																	href="${pageContext.request.contextPath}/area/findByIdchakan.do?areaid=${area.areaid}">查看</a></td>
 															</tr>
 														</c:forEach>
 
