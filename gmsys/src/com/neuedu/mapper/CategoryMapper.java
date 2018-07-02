@@ -14,4 +14,8 @@ public interface CategoryMapper {
 
     int updateByPrimaryKey(Category record);
     List<Category> selectByCnamemohu(String cname);
+    
+    Long findNewCont();
+    
+    List<Category> findNewsPage(int i, int j);
 }

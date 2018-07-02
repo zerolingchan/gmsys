@@ -138,4 +138,24 @@ public class BaseDataManageServiceImpl implements BaseDataManageService{
 		// TODO Auto-generated method stub
 		BalanceMapper.insert(record);
 	}
+	@Override
+	public Long findNewCont() {
+		// TODO Auto-generated method stub
+		return AreaMapper.findNewCont();
+	}
+	@Override
+	public List<Area> findNewsPage(int i, int j) {
+		// TODO Auto-generated method stub
+		return AreaMapper.findNewsPage(i, j);
+	}
+	@Override
+	public Long findNewContCategory() {
+		// TODO Auto-generated method stub
+		return mapper.findNewCont();
+	}
+	@Override
+	public List<Category> findNewsPageCategory(int i, int j) {
+		// TODO Auto-generated method stub
+		return mapper.findNewsPage(i, j);
+	}
 }

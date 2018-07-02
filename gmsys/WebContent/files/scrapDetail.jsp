@@ -1,39 +1,16 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="com.neuedu.model.Category"%>
+<%@page import="com.neuedu.model.Scrap"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List" isELIgnored="false"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Amaze UI Admin index Examples</title>
-<meta name="description" content="这是一个 index 页面">
-<meta name="keywords" content="index">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="renderer" content="webkit">
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png"
-	href="${pageContext.request.contextPath}/assets/i/favicon.png">
-<link rel="apple-touch-icon-precomposed"
-	href="${pageContext.request.contextPath}/assets/i/app-icon72x72@2x.png">
-<meta name="apple-mobile-web-app-title" content="Amaze UI" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/amazeui.min.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/admin.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/app.css">
-<script
-	src="${pageContext.request.contextPath}/assets/js/echarts.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>集团化资产管理系统 by www.mycodes.net</title>
 <style type="text/css">
 <!--
 body {
@@ -79,7 +56,18 @@ html {
 }
 -->
 </style>
-
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
+<link rel="apple-touch-icon-precomposed"
+	href="${pageContext.request.contextPath}/assets/i/app-icon72x72@2x.png">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/amazeui.min.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/admin.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/app.css">
+<script
+	src="${pageContext.request.contextPath}/assets/js/echarts.min.js"></script>
 <link href="../css/css.css" rel="stylesheet" type="text/css" />
 <script type="text/JavaScript">
 
@@ -109,55 +97,14 @@ function unselectAll(){
 	}
 }
 
-
-
-
-
 function link(){
-    document.getElementById("fom").action="../files/addClassificationOfAssets.jsp";
+    document.getElementById("fom").action="${pageContext.request.contextPath}/files/addScrap.jsp";
    document.getElementById("fom").submit();
 }
 
-/*批量删除*/
-function del(){
-	var obj = document.fom.elements;
-	var  paramUrl="";
-	for (var i=0;i<obj.length;i++){
-		if (obj[i].name=="delid"&&obj[i].checked ==true){
-			paramUrl+=obj[i].value+":";
-			
-		}
-	}
-	if(paramUrl==""){
-		alert("请删除要选中的项目");
-		return;
-	}
-	if(paramUrl=="1:"){
-		alert("这个外键删不了 ，别删了，删其他的吧");
-		return;
-	}
-	document.getElementById("fom").action="${pageContext.request.contextPath}/category/delete.do?cid="+paramUrl;
-	/* console.log("${pageContext.request.contextPath}/category/delete.action?cid="+paramUrl);
-	document.location.href="${pageContext.request.contextPath}/category/delete.do?cid="+paramUrl; */
-	
-	
-}
-function check(){
-	var obj = document.fom.elements;
-	var  chazhao="";
-	for (var i=0;i<obj.length;i++){
-		if (obj[i].name=="shuru"){
-			chazhao+=obj[i].value
-			
-		}
-	}
-	var params = encodeURI(encodeURI(chazhao));
-	 document.getElementById("fom").action="${pageContext.request.contextPath}/category/findBymh.do?zha="+params; 
-}
 </SCRIPT>
+
 <body data-type="index">
-
-
 	<header class="am-topbar am-topbar-inverse admin-header">
 	<div class="am-topbar-brand">
 		<a href="javascript:;" class="tpl-logo" style="margin-top: 30px;">
@@ -324,11 +271,11 @@ function check(){
 							class="am-icon-home"></i> <span>基础数据管理</span> <i
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
 					</a>
-						<ul class="tpl-left-nav-sub-menu" style="display: block">
+						<ul class="tpl-left-nav-sub-menu">
 							<li><a
-								href="${pageContext.request.contextPath}/category/findAll.do"
-								class="active"> <i class="am-icon-angle-right"></i> <span>资产分类设置</span>
-									<i class="tpl-left-nav-content tpl-badge-success"></i>
+								href="${pageContext.request.contextPath}/category/findAll.do">
+									<i class="am-icon-angle-right"></i> <span>资产分类设置</span> <i
+									class="tpl-left-nav-content tpl-badge-success"></i>
 							</a> <a
 								href="${pageContext.request.contextPath}/department/findAll.do">
 									<i class="am-icon-angle-right"></i> <span>部门设置</span> <i
@@ -345,11 +292,11 @@ function check(){
 							class="am-icon-bar-chart"></i> <span>资产管理</span> <i
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
 					</a>
-						<ul class="tpl-left-nav-sub-menu">
+						<ul class="tpl-left-nav-sub-menu" style="display: block">
 							<li><a
-								href="${pageContext.request.contextPath}/buy/findAll.do"> <i
-									class="am-icon-angle-right"></i> <span>采购管理</span> <i
-									class="tpl-left-nav-content tpl-badge-success"></i>
+								href="${pageContext.request.contextPath}/buy/findAll.do"
+								class="active"> <i class="am-icon-angle-right"></i> <span>采购管理</span>
+									<i class="tpl-left-nav-content tpl-badge-success"></i>
 							</a> <a
 								href="${pageContext.request.contextPath}/buyProuduct/findAll.do">
 									<i class="am-icon-angle-right"></i> <span>盘点管理</span> <i
@@ -416,178 +363,92 @@ function check(){
 
 
 		<%--内容 --%>
-		<div class="tpl-content-wrapper">
-			<form name="fom" id="fom" method="post">
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-
+        <div class="tpl-content-wrapper">
+            
+            <form name="fom" id="fom" method="post">
+				  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+				    <td height="30">      
+				  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+				    <td height="62" background="../images/nav04.gif">         
+					<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
 					<tr>
-						<td height="30">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
-								<tr>
-									<td height="62" background="../images/nav04.gif">
-
-										<table width="98%" border="0" align="center" cellpadding="0"
-											cellspacing="0">
-											<tr>
-												<td width="24"><img src="../images/ico07.gif"
-													width="20" height="18" /></td>
-												<td width="519"><label>模糊查询找: <input
-														name="shuru" type="text" value="输入要查找的值" />
-												</label> <input name="Submit" type="submit" class="right-button02"
-													value="查 询" onclick="check();" /></td>
-												<td width="679" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												</td>
-											</tr>
-										</table>
-									</td>
-								</tr>
-							</table>
-						</td>
+						<td width="21">&nbsp;</td>
 					</tr>
-					<tr>
-						<td><table id="subtree1" style="DISPLAY:" width="100%"
-								border="0" cellspacing="0" cellpadding="0">
-								<tr>
-									<td><table width="95%" border="0" align="center"
-											cellpadding="0" cellspacing="0">
-											<tr>
-												<td height="20"><span class="newfont07">选择：<a
-														href="#" class="right-font08" onclick="selectAll();">全选</a>-<a
-														href="#" class="right-font08" onclick="unselectAll();">反选</a></span>
-													<input name="Submit" type="submit" class="right-button08"
-													value="删除所选资产分类信息" onclick="del();" /> <input
-													name="Submit" type="button" class="right-button08"
-													value="添加资产分类信息" onclick="link();" />
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												</td>
-											</tr>
-											<tr>
-												<td height="40" class="font42"><table width="100%"
-														border="0" cellpadding="4" cellspacing="1"
-														bgcolor="#464646" class="newfont03">
-
-														<tr>
-															<td height="20" colspan="14" align="center"
-																bgcolor="#EEEEEE" class="tablestyle_title">
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资产分类详细列表
-																&nbsp;</td>
-														</tr>
-														<tr>
-															<td width="8%" align="center" bgcolor="#EEEEEE">选择</td>
-															<td width="12%" height="20" align="center"
-																bgcolor="#EEEEEE">资产分类编号</td>
-															<td width="12%" height="20" align="center"
-																bgcolor="#EEEEEE">分类名称</td>
-
-
-															<td width="11%" align="center" bgcolor="#EEEEEE">操作</td>
-														</tr>
-
-														<%
-				              	System.out.println("------------laile");
-				              		List<Category> list=(List<Category>)request.getAttribute("listCategory");
-				              		System.out.println("ds-------"+list.size());
-				              	Iterator<Category> it=list.iterator();
-				              	while(it.hasNext()){
-				              		Category c=it.next();
-				              		
-				              		%>
-														<%--  <c:forEach items="${listCategory}" var="c"> --%>
-
-														<tr>
-
-															<td bgcolor="#FFFFFF"><input type="checkbox"
-																name="delid" value="<%=c.getCid()%>" /></td>
-															<td bgcolor="#FFFFFF"><%=c.getCid()%></td>
-															<td height="20" bgcolor="#FFFFFF"><%=c.getCname()%></td>
-															、
-															<td bgcolor="#FFFFFF"><a
-																href="${pageContext.request.contextPath}/category/findById.do?cid=<%=c.getCid()%>">编辑</a>&nbsp;|&nbsp;<a
-																href="${pageContext.request.contextPath}/category/findByIdchakan.do?cid=<%=c.getCid()%>">查看</a></td>
-														</tr>
-														<%-- </c:forEach> --%>
-														<%
-				              }
-				              	 %>
-
-
-													</table></td>
-											</tr>
-										</table></td>
-								</tr>
-							</table>
-
-
-							<table width="95%" border="0" align="center" cellpadding="0"
-								cellspacing="0">
-								<tr>
-									<td height="6"><img src="../images/spacer.gif" width="1"
-										height="1" /></td>
-								</tr>
-								<tr>
-									<td height="33"><table width="100%" border="0"
-											align="center" cellpadding="0" cellspacing="0"
-											class="right-font08">
-											<!-- <tr>
-												<td width="50%">共 <span class="right-text09">5</span> 页
-													| 第 <span class="right-text09">1</span> 页
-												</td>
-												<td width="49%" align="right">[<a href="#"
-													class="right-font08">首页</a> | <a href="#"
-													class="right-font08">上一页</a> | <a href="#"
-													class="right-font08">下一页</a> | <a href="#"
-													class="right-font08">末页</a>] 转至：
-												</td>
-												<td width="1%"><table width="20" border="0"
-														cellspacing="0" cellpadding="0">
-														<tr>
-															<td width="1%"><input name="textfield3" type="text"
-																class="right-textfield03" size="1" /></td>
-															<td width="87%"><input name="Submit23222"
-																type="submit" class="right-button06" value=" " /></td>
-														</tr> -->
-														<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第  
-						            ${page.pageNow} 页</font> <a href="../category/findAll.do?pageNow=1">首页</a>  
-						        <c:choose>  
-						            <c:when test="${page.pageNow - 1 > 0}">  
-						                <a href="../category/findAll.do?pageNow=${page.pageNow - 1}">上一页</a>  
-						            </c:when>  
-						            <c:when test="${page.pageNow - 1 <= 0}">  
-						                <a href="../category/findAll.do?pageNow=1">上一页</a>  
-						            </c:when>  
-						        </c:choose>  
-						        <c:choose>  
-						            <c:when test="${page.totalPageCount==0}">  
-						                <a href="../category/findAll.do?pageNow=${page.pageNow}">下一页</a>  
-						            </c:when>  
-						            <c:when test="${page.pageNow + 1 < page.totalPageCount}">  
-						                <a href="../category/findAll.do?pageNow=${page.pageNow + 1}">下一页</a>  
-						            </c:when>  
-						            <c:when test="${page.pageNow + 1 >= page.totalPageCount}">  
-						                <a href="../category/findAll.do?pageNow=${page.totalPageCount}">下一页</a>  
-						            </c:when>  
-						        </c:choose>  
-						        <c:choose>  
-						            <c:when test="${page.totalPageCount==0}">  
-						                <a href="../category/findAll.do?pageNow=${page.pageNow}">尾页</a>  
-						            </c:when>  
-						            <c:otherwise>  
-						                <a href="../category/findAll.do?pageNow=${page.totalPageCount}">尾页</a>  
-						            </c:otherwise>  
-						        </c:choose> 
-													</table></td>
-											</tr>
-										</table></td>
-								</tr>
-							</table></td>
-					</tr>
+				  </table></td>
+				  </tr>
+				  </table></td></tr>
+				  <tr>
+				    <td><table id="subtree1" style="DISPLAY: " width="100%" border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+				    <td><table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+				  <tr>
+				    <td height="40" class="font42"><table width="100%" border="0" cellpadding="4" cellspacing="1" bgcolor="#464646" class="newfont03">
+				  <tr>
+				    <td height="20" colspan="2" align="center" bgcolor="#EEEEEE"class="tablestyle_title"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 采购单详细内容</td>
+				  </tr>
+				  
+				  <%
+									 	Scrap ag=(Scrap)request.getAttribute("Scrap1");
+										 SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
+										 
+									 %>
+				  
+				  <tr>
+				    <td width="16%" height="20" align="right" bgcolor="#FFFFFF">报废单号:</td>
+				    <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getSid() %></td>
+				  </tr>
+				  <tr>
+						<td width="16%" height="20" align="right" bgcolor="#FFFFFF">报废数量:</td>
+				    <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getScount() %></td>
+				  </tr>
+				  <tr>
+				    <td width="16%" height="20" align="right" bgcolor="#FFFFFF">报废时间:</td>
+				    <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=format0.format(ag.getStime()) %></td>
+				  </tr>
+				   <tr>
+				  <td width="16%" height="20" align="right" bgcolor="#FFFFFF">资产编号：</td>
+				   <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getBid() %></td>
+				   
+				  </tr>
+				  <tr>
+				     <td width="16%" height="20" align="right" bgcolor="#FFFFFF">部门编号:</td>
+				      <td width="84%" colspan="2" bgcolor="#FFFFFF"><%=ag.getDepartid() %></td>
+				   
+				  </tr>
+				  </table></td>
+				  </tr>
+				  </table></td>
+				  </tr>
+				  </table>
+				  <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+				  <tr>
+				    <td height="6"><img src="../images/spacer.gif" width="1" height="1" /></td>
+				  </tr>
+				  <tr>
+				    <td height="33"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="right-font08">
+				  <tr>
+				    <td width="50%">共 <span class="right-text09">5</span> 页 | 第 <span class="right-text09">1</span> 页</td>
+				    <td width="49%" align="right">[<a href="#" class="right-font08">首页</a> | <a href="#" class="right-font08">上一页</a> | <a href="#" class="right-font08">下一页</a> | <a href="#" class="right-font08">末页</a>] 转至：</td>
+				    <td width="1%"><table width="20" border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+				    <td width="1%"><input name="textfield3" type="text" class="right-textfield03" size="1" /></td>
+				    <td width="87%"><input name="Submit23222" type="submit" class="right-button06" value=" " />
+				    </td>
+				  </tr>
+				  </table></td>
+				  </tr>
+				  </table></td>
+				  </tr>
+				  </table></td>
+				  </tr>
 				</table>
-			</form>
+				</form>
 
+			
 
-
-
-		</div>
+        </div>
 
 
 		<script
@@ -597,5 +458,4 @@ function check(){
 		<script src="${pageContext.request.contextPath}/assets/js/iscroll.js"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/app.js"></script>
 </body>
-
 </html>

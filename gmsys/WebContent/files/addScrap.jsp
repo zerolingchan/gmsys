@@ -1,39 +1,15 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="com.neuedu.model.Category"%>
+<%@page import="com.neuedu.model.*"%>
 <%@page import="java.util.List" isELIgnored="false"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Amaze UI Admin index Examples</title>
-<meta name="description" content="这是一个 index 页面">
-<meta name="keywords" content="index">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="renderer" content="webkit">
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png"
-	href="${pageContext.request.contextPath}/assets/i/favicon.png">
-<link rel="apple-touch-icon-precomposed"
-	href="${pageContext.request.contextPath}/assets/i/app-icon72x72@2x.png">
-<meta name="apple-mobile-web-app-title" content="Amaze UI" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/amazeui.min.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/admin.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/app.css">
-<script
-	src="${pageContext.request.contextPath}/assets/js/echarts.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>集团化资产管理系统 by www.mycodes.net</title>
 <style type="text/css">
 <!--
 body {
@@ -77,14 +53,37 @@ html {
 	overflow-y: auto;
 	border: 0;
 }
--->
-</style>
 
+-->
+.atten {
+	font-size: 12px;
+	font-weight: normal;
+	color: #F00;
+}
+</style>
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
+<link rel="apple-touch-icon-precomposed"
+	href="${pageContext.request.contextPath}/assets/i/app-icon72x72@2x.png">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/amazeui.min.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/admin.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/app.css">
+<script
+	src="${pageContext.request.contextPath}/assets/js/echarts.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.js"></script>
 <link href="../css/css.css" rel="stylesheet" type="text/css" />
 <script type="text/JavaScript">
 
 </script>
 <link href="../css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.min.css">
+<link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.theme.min.css">
+
+<script src="jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+<script src="jquery-ui-1.12.1/jquery-ui.min.js"></script>
 </head>
 <SCRIPT language=JavaScript>
 function sousuo(){
@@ -109,55 +108,36 @@ function unselectAll(){
 	}
 }
 
-
-
-
-
 function link(){
-    document.getElementById("fom").action="../files/addClassificationOfAssets.jsp";
+    document.getElementById("fom").action="${pageContext.request.contextPath}/files/addScrap.jsp";
    document.getElementById("fom").submit();
 }
+function tishi()
+{
+  var a=confirm('数据库中保存有该人员基本信息，您可以修改或保留该信息。');
+  if(a!=true)return false;
+  window.open("冲突页.htm","","depended=0,alwaysRaised=1,width=800,height=400,location=0,menubar=0,resizable=0,scrollbars=0,status=0,toolbar=0");
+}
 
-/*批量删除*/
-function del(){
-	var obj = document.fom.elements;
-	var  paramUrl="";
-	for (var i=0;i<obj.length;i++){
-		if (obj[i].name=="delid"&&obj[i].checked ==true){
-			paramUrl+=obj[i].value+":";
-			
-		}
-	}
-	if(paramUrl==""){
-		alert("请删除要选中的项目");
-		return;
-	}
-	if(paramUrl=="1:"){
-		alert("这个外键删不了 ，别删了，删其他的吧");
-		return;
-	}
-	document.getElementById("fom").action="${pageContext.request.contextPath}/category/delete.do?cid="+paramUrl;
-	/* console.log("${pageContext.request.contextPath}/category/delete.action?cid="+paramUrl);
-	document.location.href="${pageContext.request.contextPath}/category/delete.do?cid="+paramUrl; */
-	
-	
+function check()
+{
+document.getElementById("aa").style.display="";
 }
-function check(){
-	var obj = document.fom.elements;
-	var  chazhao="";
-	for (var i=0;i<obj.length;i++){
-		if (obj[i].name=="shuru"){
-			chazhao+=obj[i].value
-			
-		}
-	}
-	var params = encodeURI(encodeURI(chazhao));
-	 document.getElementById("fom").action="${pageContext.request.contextPath}/category/findBymh.do?zha="+params; 
-}
+function verification() { 
+	var _reTimeReg =/^(\d{4})-(0\d{1}|1[0-2])-(0\d{1}|[12]\d{1}|3[01])$/; ;
+	var jhsjq=$("#STIME").val();
+    if($('#SCOUNT').val() == "") {  
+        alert('报废数量不能为空!');  
+        return false;  
+    }  
+    if($('#STIME').val() == ""&&!_reTimeReg.test(jhsjq)) {  
+        alert('报废时间不能为空!且格式为：yyyy-MM-dd');  
+        return false;  
+    }    
+    return true;  
+} 
 </SCRIPT>
-<body data-type="index">
-
-
+<body class="ContentBody" data-type="index">
 	<header class="am-topbar am-topbar-inverse admin-header">
 	<div class="am-topbar-brand">
 		<a href="javascript:;" class="tpl-logo" style="margin-top: 30px;">
@@ -306,12 +286,6 @@ function check(){
 	</div>
 	</header>
 
-
-
-
-
-
-
 	<div class="tpl-page-container tpl-page-header-fixed">
 
 
@@ -324,16 +298,16 @@ function check(){
 							class="am-icon-home"></i> <span>基础数据管理</span> <i
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
 					</a>
-						<ul class="tpl-left-nav-sub-menu" style="display: block">
+						<ul class="tpl-left-nav-sub-menu">
 							<li><a
-								href="${pageContext.request.contextPath}/category/findAll.do"
-								class="active"> <i class="am-icon-angle-right"></i> <span>资产分类设置</span>
-									<i class="tpl-left-nav-content tpl-badge-success"></i>
+								href="${pageContext.request.contextPath}/category/findAll.do">
+									<i class="am-icon-angle-right"></i> <span>资产分类设置</span> <i
+									class="tpl-left-nav-content tpl-badge-success"></i>
 							</a> <a
 								href="${pageContext.request.contextPath}/department/findAll.do">
 									<i class="am-icon-angle-right"></i> <span>部门设置</span> <i
 									class="tpl-left-nav-content tpl-badge-success"></i> <a
-									href="../files/addProperty.jsp"> <i class="am-icon-angle-right"></i>
+									href="../files/addzc.jsp"> <i class="am-icon-angle-right"></i>
 										<span>资产录入</span> <i
 										class="tpl-left-nav-content tpl-badge-primary"></i> <a
 										href="../area/list.do"> <i class="am-icon-angle-right"></i>
@@ -345,11 +319,11 @@ function check(){
 							class="am-icon-bar-chart"></i> <span>资产管理</span> <i
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
 					</a>
-						<ul class="tpl-left-nav-sub-menu">
+						<ul class="tpl-left-nav-sub-menu" style="display: block">
 							<li><a
-								href="${pageContext.request.contextPath}/buy/findAll.do"> <i
-									class="am-icon-angle-right"></i> <span>采购管理</span> <i
-									class="tpl-left-nav-content tpl-badge-success"></i>
+								href="${pageContext.request.contextPath}/buy/findAll.do"
+								class="active"> <i class="am-icon-angle-right"></i> <span>采购管理</span>
+									<i class="tpl-left-nav-content tpl-badge-success"></i>
 							</a> <a
 								href="${pageContext.request.contextPath}/buyProuduct/findAll.do">
 									<i class="am-icon-angle-right"></i> <span>盘点管理</span> <i
@@ -417,177 +391,113 @@ function check(){
 
 		<%--内容 --%>
 		<div class="tpl-content-wrapper">
-			<form name="fom" id="fom" method="post">
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-
-					<tr>
-						<td height="30">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+            
+            <form action="${pageContext.request.contextPath}/scrap/add.do" method="post" name="form" onsubmit="return verification()">
+				<div class="MainDiv">
+					<table width="99%" border="0" cellpadding="0" cellspacing="0" class="CContent">
+			  			<tr>
+			      			<th class="tablestyle_title" >报废单添加页面</th>
+			  			</tr>
+			  			<tr>
+			    			<td class="CPanel">
+					
+			    			<table border="0" cellpadding="0" cellspacing="0" style="width:100%"></table>
+							</td>
+						</tr>
+						<tr>
+							<td align="left">
+							<input type="button" name="Submit" value="保存" class="button" onclick="alert('保存成功！');"/>　			
+							<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/>			
+							</td>
+						</tr>
+									
+						<TR>
+							<TD width="100%">
+								<fieldset style="height:100%;">
+								<legend>添加报废信息</legend>
+								<table border="0" cellpadding="2" cellspacing="1" style="width:100%">
 								<tr>
-									<td height="62" background="../images/nav04.gif">
-
-										<table width="98%" border="0" align="center" cellpadding="0"
-											cellspacing="0">
-											<tr>
-												<td width="24"><img src="../images/ico07.gif"
-													width="20" height="18" /></td>
-												<td width="519"><label>模糊查询找: <input
-														name="shuru" type="text" value="输入要查找的值" />
-												</label> <input name="Submit" type="submit" class="right-button02"
-													value="查 询" onclick="check();" /></td>
-												<td width="679" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												</td>
-											</tr>
-										</table>
+									
+									<td width="16%" align="right" nowrap="nowrap">报废数量:</td>
+									<td width="34%"><input class="text" id="SCOUNT" name='SCOUNT' style="width:154px" value=""/>
+									</td>
+								</tr> 
+								
+								<tr>
+									
+									<td nowrap="nowrap" align="right">报废时间:</td>
+									<td><input  class="text" id="STIME" name='STIME'  style="width:154px" value=""/>
+									</td>
+									<td align="right">资产编号:</td>
+								    <td>
+										<select name="BID" style="width:154px">
+									    		<%
+										    		List<Balance> list=(List<Balance>)request.getAttribute("Scrap2");
+									              	Iterator<Balance> it=list.iterator();
+									              	
+									              	while(it.hasNext()){
+									              	
+									              		Balance c=it.next();
+									    		%>
+									    		
+											   	
+											   	<option value ="<%=c.getBid()%>"><%=c.getBid()%></option>
+											  <%} %>
+											</select>
 									</td>
 								</tr>
-							</table>
-						</td>
-					</tr>
-					<tr>
-						<td><table id="subtree1" style="DISPLAY:" width="100%"
-								border="0" cellspacing="0" cellpadding="0">
 								<tr>
-									<td><table width="95%" border="0" align="center"
-											cellpadding="0" cellspacing="0">
-											<tr>
-												<td height="20"><span class="newfont07">选择：<a
-														href="#" class="right-font08" onclick="selectAll();">全选</a>-<a
-														href="#" class="right-font08" onclick="unselectAll();">反选</a></span>
-													<input name="Submit" type="submit" class="right-button08"
-													value="删除所选资产分类信息" onclick="del();" /> <input
-													name="Submit" type="button" class="right-button08"
-													value="添加资产分类信息" onclick="link();" />
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												</td>
-											</tr>
-											<tr>
-												<td height="40" class="font42"><table width="100%"
-														border="0" cellpadding="4" cellspacing="1"
-														bgcolor="#464646" class="newfont03">
-
-														<tr>
-															<td height="20" colspan="14" align="center"
-																bgcolor="#EEEEEE" class="tablestyle_title">
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资产分类详细列表
-																&nbsp;</td>
-														</tr>
-														<tr>
-															<td width="8%" align="center" bgcolor="#EEEEEE">选择</td>
-															<td width="12%" height="20" align="center"
-																bgcolor="#EEEEEE">资产分类编号</td>
-															<td width="12%" height="20" align="center"
-																bgcolor="#EEEEEE">分类名称</td>
-
-
-															<td width="11%" align="center" bgcolor="#EEEEEE">操作</td>
-														</tr>
-
-														<%
-				              	System.out.println("------------laile");
-				              		List<Category> list=(List<Category>)request.getAttribute("listCategory");
-				              		System.out.println("ds-------"+list.size());
-				              	Iterator<Category> it=list.iterator();
-				              	while(it.hasNext()){
-				              		Category c=it.next();
-				              		
-				              		%>
-														<%--  <c:forEach items="${listCategory}" var="c"> --%>
-
-														<tr>
-
-															<td bgcolor="#FFFFFF"><input type="checkbox"
-																name="delid" value="<%=c.getCid()%>" /></td>
-															<td bgcolor="#FFFFFF"><%=c.getCid()%></td>
-															<td height="20" bgcolor="#FFFFFF"><%=c.getCname()%></td>
-															、
-															<td bgcolor="#FFFFFF"><a
-																href="${pageContext.request.contextPath}/category/findById.do?cid=<%=c.getCid()%>">编辑</a>&nbsp;|&nbsp;<a
-																href="${pageContext.request.contextPath}/category/findByIdchakan.do?cid=<%=c.getCid()%>">查看</a></td>
-														</tr>
-														<%-- </c:forEach> --%>
-														<%
-				              }
-				              	 %>
-
-
-													</table></td>
-											</tr>
-										</table></td>
+									<td align="right">部门编号:</td>
+								    <td>
+										<select name="DEPARTID" style="width:154px">
+									    		<%
+										    		List<Department> list1=(List<Department>)request.getAttribute("Scrap3");
+									              	Iterator<Department> it1=list1.iterator();
+									              	while(it1.hasNext()){
+									              	
+									              		Department d=it1.next();
+									    		%>
+									    		
+											   	
+											   	<option value ="<%=d.getDepartid()%>"><%=d.getDepartid()%></option>
+											  <% }%>
+											</select>
+									</td>
+									
+									
 								</tr>
-							</table>
-
-
-							<table width="95%" border="0" align="center" cellpadding="0"
-								cellspacing="0">
-								<tr>
-									<td height="6"><img src="../images/spacer.gif" width="1"
-										height="1" /></td>
-								</tr>
-								<tr>
-									<td height="33"><table width="100%" border="0"
-											align="center" cellpadding="0" cellspacing="0"
-											class="right-font08">
-											<!-- <tr>
-												<td width="50%">共 <span class="right-text09">5</span> 页
-													| 第 <span class="right-text09">1</span> 页
-												</td>
-												<td width="49%" align="right">[<a href="#"
-													class="right-font08">首页</a> | <a href="#"
-													class="right-font08">上一页</a> | <a href="#"
-													class="right-font08">下一页</a> | <a href="#"
-													class="right-font08">末页</a>] 转至：
-												</td>
-												<td width="1%"><table width="20" border="0"
-														cellspacing="0" cellpadding="0">
-														<tr>
-															<td width="1%"><input name="textfield3" type="text"
-																class="right-textfield03" size="1" /></td>
-															<td width="87%"><input name="Submit23222"
-																type="submit" class="right-button06" value=" " /></td>
-														</tr> -->
-														<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第  
-						            ${page.pageNow} 页</font> <a href="../category/findAll.do?pageNow=1">首页</a>  
-						        <c:choose>  
-						            <c:when test="${page.pageNow - 1 > 0}">  
-						                <a href="../category/findAll.do?pageNow=${page.pageNow - 1}">上一页</a>  
-						            </c:when>  
-						            <c:when test="${page.pageNow - 1 <= 0}">  
-						                <a href="../category/findAll.do?pageNow=1">上一页</a>  
-						            </c:when>  
-						        </c:choose>  
-						        <c:choose>  
-						            <c:when test="${page.totalPageCount==0}">  
-						                <a href="../category/findAll.do?pageNow=${page.pageNow}">下一页</a>  
-						            </c:when>  
-						            <c:when test="${page.pageNow + 1 < page.totalPageCount}">  
-						                <a href="../category/findAll.do?pageNow=${page.pageNow + 1}">下一页</a>  
-						            </c:when>  
-						            <c:when test="${page.pageNow + 1 >= page.totalPageCount}">  
-						                <a href="../category/findAll.do?pageNow=${page.totalPageCount}">下一页</a>  
-						            </c:when>  
-						        </c:choose>  
-						        <c:choose>  
-						            <c:when test="${page.totalPageCount==0}">  
-						                <a href="../category/findAll.do?pageNow=${page.pageNow}">尾页</a>  
-						            </c:when>  
-						            <c:otherwise>  
-						                <a href="../category/findAll.do?pageNow=${page.totalPageCount}">尾页</a>  
-						            </c:otherwise>  
-						        </c:choose> 
-													</table></td>
-											</tr>
-										</table></td>
-								</tr>
-							</table></td>
-					</tr>
-				</table>
-			</form>
-
-
-
-
-		</div>
+								</table><br />
+							    </fieldset>			
+						    </TD>
+					    </TR>
+				 	    <TR>
+							<TD colspan="2" align="center" height="50px">
+					    	<input type="submit" name="Submit" value="保存" class="button"/>
+					    	<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/>
+					    	</TD>
+						</TR>
+					</table>
+				</div>
+			    </form>
+			    <script>
+			        
+			        /*
+			         在网页中使用第三方js组件的开发步骤：
+			            1.下载js源代码，可能包含一些主题文件(css,images,js,flash)
+			            2.拷贝到项目中，项目目录下面
+			            3.在页面中引入js和css
+			            4.编写代码进行调用
+			        */
+			         $(function() {  
+			              //插件的调用  
+			              $("#datevalue21").datepicker({  
+			                  //在这里进行插件的属性设置 
+			                  dateFormat: "yy-mm-dd"
+			              });  
+			  
+			           }); 
+			    </script>
+        </div>
 
 
 		<script
@@ -597,5 +507,4 @@ function check(){
 		<script src="${pageContext.request.contextPath}/assets/js/iscroll.js"></script>
 		<script src="${pageContext.request.contextPath}/assets/js/app.js"></script>
 </body>
-
 </html>
